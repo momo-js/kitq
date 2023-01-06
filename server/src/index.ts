@@ -23,6 +23,11 @@ app.use(express.urlencoded({extended: true}));
 app.use('/auth', authRoutes)
 app.use('/posts', postRoutes)
 
+// "scripts": {
+//   "start": "ts-node src/index.ts",
+//   "dev": "nodemon --watch \"src/**\" --ext \"ts,json\" --exec \"ts-node src/index.ts\""
+// },
+
 mongoose.set("strictQuery", true);
 const PORT = process.env.PORT || 3001;
 mongoose
