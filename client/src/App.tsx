@@ -12,7 +12,6 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        {/* routes */}
         <Route path='/' element={<Welcome />} />
         <Route path='/home' element={ isAuth ? <Home /> : <Navigate to='/' /> } />
         <Route path='/register' element={<DynamicSign />} />

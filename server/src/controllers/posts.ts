@@ -52,24 +52,21 @@ export const getFeedHot = async (
   try {
     const post = await Post.find();
 
-    let hotPosts = [] as any
+    let hotPosts = [] as any;
 
     const filterHot = async () => {
-      post.map((item: any)=>{
-        // @ts-ignore
-        if (item.likes.size >= 2) {
-          // @ts-ignore
-          hotPosts.push(item)
+      post.map((item: any) => {
+        if (item.likes.size >= 5) {
+          hotPosts.push(item);
         }
-      })
-    }
-    filterHot()
+      });
+    };
+    filterHot();
     res.status(200).json(hotPosts);
   } catch (err: any) {
     res.status(404).json({ message: err.message });
   }
 };
-
 
 // export const getFeedHot = async (
 //   req: Request,
@@ -101,14 +98,10 @@ export const likePost = async (
     const post: any = await Post.findById(id);
     const isLiked = post.likes.get(userId);
 
-    console.log(isLiked);
-
     if (isLiked) {
       post.likes.delete(userId);
-      console.log("first");
     } else {
       post.likes.set(userId, true);
-      console.log("second");
     }
 
     const updatedPost = await Post.findByIdAndUpdate(
